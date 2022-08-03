@@ -4,6 +4,7 @@ import * as productService from '../Services/productService.js';
 const initialState = {
   loading: false,
   error: null,
+  _id: '',
   name: '',
   slug: '',
   image: '',
@@ -30,7 +31,6 @@ const productSlice = createSlice({
   initialState: initialState,
   reducers: {
     incrementProductAmount: (state, action) => {
-      console.log('increment');
       return {
         products: state.products.map((product) =>
           product.id === action.payload.id
@@ -67,6 +67,7 @@ const productSlice = createSlice({
       state.rating = payload.rating;
       state.numReviews = payload.numReviews;
       state.reviews = payload.reviews;
+      state._id = payload._id;
     },
     [getProductBySlug.rejected]: (state, { payload }) => {
       state.loading = false;

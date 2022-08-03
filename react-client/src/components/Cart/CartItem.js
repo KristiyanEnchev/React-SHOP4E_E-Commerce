@@ -6,6 +6,7 @@ import { removeItem, increase, decrease } from '../../redux/cartSlice.js';
 
 export const CartItem = (item) => {
   const dispatch = useDispatch();
+
   return (
     <div className="product" key={item._id}>
       <img

@@ -44,7 +44,7 @@ const Navigation = () => {
 
   useEffect(() => {
     dispatch(calculateTotals());
-  }, [cartItems, dispatch, isOpen]);
+  }, [cartItems, dispatch]);
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);

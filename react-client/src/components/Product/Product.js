@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import {
+  AiFillStar,
+  AiOutlineMinus,
+  AiOutlinePlus,
+  AiOutlineStar,
+} from 'react-icons/ai';
 // IoStarHalf,
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addToCart } from '../../redux/cartSlice.js';
+import { addToCart, decrease, increase } from '../../redux/cartSlice.js';
 import { openModal } from '../../redux/modalSlice.js';
 import { getProductBySlug, selectProduct } from '../../redux/productSlice.js';
 import { getProducts, selectProducts } from '../../redux/productsSlice.js';
@@ -17,12 +22,15 @@ const Product = () => {
   const product = useSelector(selectProduct);
   const { products } = useSelector(selectProducts);
   const { name, description, price, loading, images } = product;
+  const { amount } = useSelector((store) => store.cart.cartItems);
+
+  // const [qty, setQty] = useState(1);
 
   const [index, setIndex] = useState(0);
 
   const handleBuyNow = () => {
     dispatch(addToCart(product));
-    dispatch(openModal(true));
+    dispatch(openModal());
   };
 
   useEffect(() => {
@@ -31,7 +39,24 @@ const Product = () => {
       dispatch(getProducts());
     }
     fetchData();
-  }, [dispatch, slug]);
+  }, [dispatch, slug, amount]);
+
+  // const incQty = () => {
+  //   setQty((oldQty) => {
+  //     const tempQty = oldQty + 1;
+  //     return tempQty;
+  //   });
+  // };
+
+  // const decQty = () => {
+  //   setQty((oldQty) => {
+  //     let tempQty = oldQty - 1;
+  //     if (tempQty < 1) {
+  //       tempQty = 1;
+  //     }
+  //     return tempQty;
+  //   });
+  // };
 
   if (loading) {
     <Loader></Loader>;
@@ -84,11 +109,11 @@ const Product = () => {
             <div className="quantity">
               <h3>Quantity:</h3>
               {/* <p className="quantity-desc">
-                <span className="minus" onClick={decQty}>
+                <span className="minus" onClick={dispatch(decrease(amount))}>
                   <AiOutlineMinus />
                 </span>
-                <span className="num">{qty}</span>
-                <span className="plus" onClick={incQty}>
+                <span className="num">{amount}</span>
+                <span className="plus" onClick={dispatch(increase(amount))}>
                   <AiOutlinePlus />
                 </span>
               </p> */}
