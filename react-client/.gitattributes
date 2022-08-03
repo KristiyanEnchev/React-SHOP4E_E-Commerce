@@ -2,6 +2,10 @@
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
 * text=auto
+<<<<<<< HEAD
+=======
+
+>>>>>>> 53ad8a35443bb2392e7963f40aa0f5cf2255edf4
 ###############################################################################
 # Set default behavior for command prompt diff.
 #
