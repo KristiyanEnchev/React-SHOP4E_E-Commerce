@@ -1,0 +1,15 @@
+import * as api from './apiService.js';
+
+const host = (api.settings.host = 'http://localhost:5000/api');
+
+export async function getProducts() {
+  return await api.get(host + '/products');
+}
+
+export async function getBanners() {
+  return await api.get(host + '/products/banners');
+}
+
+export async function getProductBySlug(slug) {
+  return await api.get(host + `/products/` + slug);
+}
