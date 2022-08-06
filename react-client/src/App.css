@@ -310,6 +310,18 @@ span.text-red {
     background-color: transparent;
 }
 
+.heading-cart {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    gap: 2px;
+    margin-left: 10px;
+    border: none;
+    background-color: transparent;
+}
+
 .cart-heading .heading {
     margin-left: 10px;
 }
@@ -814,6 +826,9 @@ a:hover {
     /* border-radius: 1rem; */
 }
 
-/* a {
-    all: unset;
-} */
+.clear-btn {
+    font-size: small;
+    width: 100px;
+    height: 40px;
+    margin-left: 10rem;
+}

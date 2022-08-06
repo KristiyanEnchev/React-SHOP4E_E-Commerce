@@ -75,6 +75,10 @@ const productSlice = createSlice({
     },
   },
 });
+
+export const { decrementProductAmount, incrementProductAmount } =
+  productSlice.actions;
+
 export default productSlice.reducer;
 
 export const selectProduct = (state) => state?.product;

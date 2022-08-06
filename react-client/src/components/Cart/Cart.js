@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartItem } from './CartItem.js';
 import { closeModal } from '../../redux/modalSlice.js';
+import { clearCart } from '../../redux/cartSlice.js';
 // import toast from 'react-hot-toast';
 
 // import getStripe from '../lib/getStripe';
@@ -12,6 +13,13 @@ const Cart = () => {
   const cartRef = useRef();
   const dispatch = useDispatch();
   const { cartItems, total, amount } = useSelector((store) => store.cart);
+
+  useEffect(() => {}, []);
+
+  const handleClear = () => {
+    dispatch(clearCart());
+    dispatch(closeModal());
+  };
 
   const handleCheckout = async () => {
     // const stripe = await getStripe();
@@ -31,15 +39,24 @@ const Cart = () => {
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
-        <button
-          type="button"
-          className="cart-heading"
-          onClick={() => dispatch(closeModal())}
-        >
-          <AiOutlineLeft />
-          <span className="heading">Your Cart</span>
-          <span className="cart-num-items">({amount} items)</span>
-        </button>
+        <div className="cart-heading">
+          <button
+            className="heading-cart"
+            type="button"
+            onClick={() => dispatch(closeModal())}
+          >
+            <AiOutlineLeft />
+            <span className="heading">Your Cart</span>
+            <span className="cart-num-items">({amount} items)</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleClear()}
+            className="btn clear-btn"
+          >
+            Clear Cart
+          </button>
+        </div>
 
         {cartItems.length < 1 && (
           <div className="empty-cart">

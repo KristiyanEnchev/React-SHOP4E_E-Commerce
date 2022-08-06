@@ -9,7 +9,7 @@ import {
 // IoStarHalf,
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addToCart, decrease, increase } from '../../redux/cartSlice.js';
+import { addToCart } from '../../redux/cartSlice.js';
 import { openModal } from '../../redux/modalSlice.js';
 import { getProductBySlug, selectProduct } from '../../redux/productSlice.js';
 import { getProducts, selectProducts } from '../../redux/productsSlice.js';
@@ -22,9 +22,8 @@ const Product = () => {
   const product = useSelector(selectProduct);
   const { products } = useSelector(selectProducts);
   const { name, description, price, loading, images } = product;
-  const { amount } = useSelector((store) => store.cart.cartItems);
 
-  // const [qty, setQty] = useState(1);
+  const [amount, setAmount] = useState(1);
 
   const [index, setIndex] = useState(0);
 
@@ -33,30 +32,35 @@ const Product = () => {
     dispatch(openModal());
   };
 
+  const addToCartHandler = () => {
+    dispatch(addToCart({ product, amount }));
+    setAmount(1);
+  };
+
   useEffect(() => {
     function fetchData() {
       dispatch(getProductBySlug(slug));
       dispatch(getProducts());
     }
     fetchData();
-  }, [dispatch, slug, amount]);
+  }, [dispatch, slug]);
 
-  // const incQty = () => {
-  //   setQty((oldQty) => {
-  //     const tempQty = oldQty + 1;
-  //     return tempQty;
-  //   });
-  // };
+  const incAmount = () => {
+    setAmount((oldAmount) => {
+      const tempAmount = oldAmount + 1;
+      return tempAmount;
+    });
+  };
 
-  // const decQty = () => {
-  //   setQty((oldQty) => {
-  //     let tempQty = oldQty - 1;
-  //     if (tempQty < 1) {
-  //       tempQty = 1;
-  //     }
-  //     return tempQty;
-  //   });
-  // };
+  const decAmount = () => {
+    setAmount((oldAmount) => {
+      let tempAmount = oldAmount - 1;
+      if (tempAmount < 1) {
+        tempAmount = 1;
+      }
+      return tempAmount;
+    });
+  };
 
   if (loading) {
     <Loader></Loader>;
@@ -108,21 +112,21 @@ const Product = () => {
             <p className="price">${price}</p>
             <div className="quantity">
               <h3>Quantity:</h3>
-              {/* <p className="quantity-desc">
-                <span className="minus" onClick={dispatch(decrease(amount))}>
+              <p className="quantity-desc">
+                <span className="minus" onClick={() => decAmount()}>
                   <AiOutlineMinus />
                 </span>
                 <span className="num">{amount}</span>
-                <span className="plus" onClick={dispatch(increase(amount))}>
+                <span className="plus" onClick={() => incAmount()}>
                   <AiOutlinePlus />
                 </span>
-              </p> */}
+              </p>
             </div>
             <div className="buttons">
               <button
                 type="button"
                 className="add-to-cart"
-                onClick={() => dispatch(addToCart(product))}
+                onClick={() => addToCartHandler()}
               >
                 Add to Cart
               </button>
