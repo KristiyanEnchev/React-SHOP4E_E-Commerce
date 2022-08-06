@@ -22,6 +22,5 @@ Shop4e is a demo E-comerce Sneakers store made for project defence in Softuni, f
 
 <img src="https://res.cloudinary.com/dmkgrwjes/image/upload/v1659807508/samples/New%20Assets/thurdjpg_r570tv.jpg" />
 
-<img src="https://res.cloudinary.com/dmkgrwjes/image/upload/v1659807509/samples/New%20Assets/4_yzxpoy.jpg" />
-
+<img src="https://res.cloudinary.com/dmkgrwjes/image/upload/v1659807956/samples/New%20Assets/12_pskbyp.jpg" />
 </p>
