@@ -8,7 +8,7 @@ Shop4e is a demo E-comerce Sneakers store made for project defence in Softuni, f
 
 **Administrator:**  admin@example.com : 123456
 
-**Employee:**  user@example.com : 123456
+**User:**  user@example.com : 123456
 
 ## Screenshots
 <p align="center">
