@@ -9,18 +9,18 @@ import {
 import React, { useEffect, useState } from 'react';
 import * as productService from '../../Services/productService.js';
 
-export const ProductList = () => {
-  const [products, setProducts] = useState([]);
+export const ProductList = ({ products }) => {
+  // const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const some = async () => {
-      const productsData = await productService.getProducts();
-      setProducts(productsData);
-    };
-    some();
-  }, []);
+  // useEffect(() => {
+  //   const some = async () => {
+  //     const productsData = await productService.getProducts();
+  //     setProducts(productsData);
+  //   };
+  //   some();
+  // }, []);
 
-  console.log(products);
+  // console.log(products);
 
   return (
     <List {...products}>

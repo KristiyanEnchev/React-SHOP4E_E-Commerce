@@ -30,7 +30,7 @@ export const register = expressAsyncHandler(async (req, res) => {
 });
 
 //LOGIN
-export const login = async (req, res) => {
+export const login = expressAsyncHandler(async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     return res.status(401).send({ message: 'Invalid email or password' });
@@ -48,7 +48,7 @@ export const login = async (req, res) => {
     avatar: user.profile.avatar,
     token: generateToken(user),
   });
-};
+});
 
 export const logout = expressAsyncHandler(async (req, res) => {
   const { token } = req;

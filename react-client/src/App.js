@@ -13,6 +13,7 @@ import Guest from './components/AuthComponent/Guest.js';
 import Scroll from './components/common/scrollTop/scrollTop.js';
 import Footer from './components/common/Layout/Footer.js';
 import Product from './components/Product/Product.js';
+import { Profile } from './components/Profile/Profile.js';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -28,13 +29,14 @@ function App() {
         {/* public routes */}
         <Route path="/" element={<Layout />}>
           {/* protected routes */}
-          <Route element={<RequireAuth />}>
-            <Route path="/logout" exact element={<Logout />} />
-          </Route>
+        </Route>
+        <Route element={<RequireAuth />}>
+          <Route path="/logout" exact element={<Logout />} />
+          <Route path="/profile" exact element={<Profile />} />
         </Route>
         {/* Admin Routes */}
         <Route element={<RequireAuthorization />}>
-          <Route path="/admin/*" element={<AdminPannel />} />
+          {/* <Route path="/admin/*" element={<AdminPannel />} /> */}
         </Route>
         <Route path="/*" element={<PageNotFound />} />
         <Route path="/product/:slug" element={<Product />} />

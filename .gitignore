@@ -6,7 +6,11 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.env
 
+env
+.env
+/.env
 /.node_modules
 node_modules
 

@@ -17,7 +17,6 @@ const productsSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: {
-    // get products
     [getProducts.pending]: (state) => {
       state.loading = true;
       state.error = null;

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { logOut } from '../../redux/AuthSlice.js';
 import * as userService from '../../Services/UserService.js';
 import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const RequireAuth = () => {
   const token = useSelector(selectCurrentToken);
@@ -18,6 +19,7 @@ const RequireAuth = () => {
       await userService.logout();
       dispatch(logOut());
       navigate('/login');
+      toast.success('Successful logut');
     }
     logout();
   }, [navigate, token, dispatch]);

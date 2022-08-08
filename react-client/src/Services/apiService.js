@@ -72,6 +72,7 @@ export async function login(email, password) {
   });
 
   sessionStorage.setItem('token', result.token);
+  sessionStorage.setItem('avatar', result.avatar);
   sessionStorage.setItem('userId', result._id);
   sessionStorage.setItem('email', result.email);
   sessionStorage.setItem('name', result.name);
@@ -99,6 +100,7 @@ export async function logout() {
   const result = await get(settings.host + '/auth/logout');
 
   sessionStorage.removeItem('token');
+  sessionStorage.removeItem('avatar');
   sessionStorage.removeItem('userId');
   sessionStorage.removeItem('email');
   sessionStorage.removeItem('name');

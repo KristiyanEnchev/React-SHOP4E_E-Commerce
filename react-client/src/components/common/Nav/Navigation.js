@@ -110,7 +110,7 @@ const Navigation = () => {
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">
                       <Link
-                        tyle={{ textDecoration: 'none', color: 'white' }}
+                        tyle={{ textDecoration: 'none', color: 'black' }}
                         to={`/${page}`}
                       >
                         {page.toUpperCase()}
@@ -118,6 +118,40 @@ const Navigation = () => {
                     </Typography>
                   </MenuItem>
                 ))}
+              </Menu>
+            ) : (
+              ''
+            )}
+            {isAdmin ? (
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                <MenuItem key={'admin'} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    {' '}
+                    <Link
+                      style={{ textDecoration: 'none', color: 'black' }}
+                      to={`/${'admin'}`}
+                    >
+                      {'ADMIN'}
+                    </Link>
+                  </Typography>
+                </MenuItem>
               </Menu>
             ) : (
               ''
@@ -146,7 +180,10 @@ const Navigation = () => {
             ''
           )}
           {isAdmin ? (
-            <Box sx={{ flexGrow: 2, display: { xs: 'none', md: 'flex' } }}>
+            <Box
+              className="avtr"
+              sx={{ flexGrow: 2, display: { xs: 'none', md: 'flex' } }}
+            >
               <MenuItem key={'admin'} onClick={handleCloseUserMenu}>
                 <Typography textAlign="center">
                   {' '}
@@ -175,7 +212,12 @@ const Navigation = () => {
           </Box>
 
           {isAuth ? (
-            <Box display="flex" justifyContent="end" sx={{ flexGrow: 0 }}>
+            <Box
+              className="avtr"
+              display="flex"
+              justifyContent="end"
+              sx={{ flexGrow: 0 }}
+            >
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   {avatar ? (

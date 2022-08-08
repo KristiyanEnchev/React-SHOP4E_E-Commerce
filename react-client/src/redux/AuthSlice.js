@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as userService from '../Services/UserService.js';
+import toast from 'react-hot-toast';
+import { getError } from '../ustils.js';
 
 const token = sessionStorage.getItem('token')
   ? sessionStorage.getItem('token')
@@ -19,8 +21,12 @@ const initialState = {
 export const userLogin = createAsyncThunk(
   'auth/login',
   async ({ email, password }) => {
-    const res = await userService.login(email, password);
-    return res;
+    try {
+      const res = await userService.login(email, password);
+      return res;
+    } catch (err) {
+      toast.error(getError(err));
+    }
   }
 );
 

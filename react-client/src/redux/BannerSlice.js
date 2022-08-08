@@ -3,7 +3,7 @@ import * as productService from '../Services/productService.js';
 
 const initialState = {
   banners: {},
-  status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  status: 'idle', 
   error: null,
 };
 
