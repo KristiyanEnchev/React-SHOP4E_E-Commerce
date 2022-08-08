@@ -8,7 +8,6 @@ import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../../redux/AuthSlice.js';
-import { getError } from '../../ustils.js';
 import { emailValidator, passwordValidator } from './Validators.js';
 
 import './Authentication.css';
@@ -29,7 +28,7 @@ export const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      let res = await dispatch(userLogin({ email, password }));
+      await dispatch(userLogin({ email, password }));
       navigate(redirect || '/');
       toast.success('Successful Login');
     } catch (err) {
