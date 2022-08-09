@@ -1,6 +1,9 @@
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectCurrentToken, selectIsAdmin } from '../../redux/AuthSlice.js';
+import {
+  selectCurrentToken,
+  selectIsAdmin,
+} from '../../redux/Public/AuthSlice.js';
 
 const RequireAuth = () => {
   const token = useSelector(selectCurrentToken);

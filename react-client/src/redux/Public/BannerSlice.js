@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import * as productService from '../Services/productService.js';
+import * as productService from '../../Services/productService.js';
 
 const initialState = {
   banners: {},
-  status: 'idle', 
+  status: 'idle',
   error: null,
 };
 

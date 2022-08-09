@@ -16,6 +16,11 @@ export const register = expressAsyncHandler(async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password),
+    profile: {
+      firstName: '',
+      lastName: '',
+      avatar: '',
+    },
   });
 
   const user = await newUser.save();

@@ -1,5 +1,7 @@
 import expressAsyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
+import bcrypt from 'bcryptjs';
+
 import { NotFoundError, RequestError } from '../Utils/validationErrors.js';
 
 //GET ALL USERS
@@ -52,4 +54,39 @@ export const deleteUser = expressAsyncHandler(async (req, res) => {
     // throw new NotFoundError('User Not Found', 404);
     res.status(404).send({ message: 'User Not Found' });
   }
+});
+
+//CREATE USER
+export const createUser = expressAsyncHandler(async (req, res) => {
+  const existing = await User.findOne({ email: req.body.email });
+
+  if (existing) {
+    return res.status(401).send({ message: 'Email is taken' });
+  }
+
+  const newUser = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: bcrypt.hashSync(req.body.password),
+    profile: {
+      firstName: req.body.profile.firstName,
+      lastName: req.body.profile.lastName,
+      avatar: req.body.profile.avatar,
+    },
+  });
+  console.error(newUser);
+
+  const user = await newUser.save();
+  res.status(200).send({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    isAdmin: user.isAdmin,
+    createdAt: user.createdAt,
+    profile: {
+      firstName: user.profile.firstName,
+      lastName: user.profile.lastName,
+      avatar: user.profile.avatar,
+    },
+  });
 });

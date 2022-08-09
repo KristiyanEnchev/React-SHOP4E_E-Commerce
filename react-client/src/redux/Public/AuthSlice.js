@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import * as userService from '../Services/UserService.js';
+import * as userService from '../../Services/UserService.js';
 import toast from 'react-hot-toast';
-import { getError } from '../ustils.js';
+import { getError } from '../../utils.js';
 
 const token = sessionStorage.getItem('token')
   ? sessionStorage.getItem('token')
   : null;
+
+const isAdmin = sessionStorage.getItem('isAdmin') === 'true' ? true : false;
 
 const initialState = {
   loading: false,
@@ -14,7 +16,7 @@ const initialState = {
   avatar: sessionStorage.getItem('avatar'),
   name: sessionStorage.getItem('name'),
   email: sessionStorage.getItem('email'),
-  isAdmin: sessionStorage.getItem('isAdmin'),
+  isAdmin: isAdmin,
   token,
 };
 

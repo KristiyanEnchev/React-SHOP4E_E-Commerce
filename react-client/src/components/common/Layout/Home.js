@@ -4,9 +4,12 @@ import HeroBanner from './HeroBanner.js';
 import { useEffect } from 'react';
 import { ProductCard } from '../../Product/ProductCard.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, selectProducts } from '../../../redux/productsSlice.js';
+import {
+  getProducts,
+  selectProducts,
+} from '../../../redux/Public/productsSlice.js';
 
-const Layout = () => {
+const Home = () => {
   const dispatch = useDispatch();
   const { products } = useSelector(selectProducts);
 
@@ -40,4 +43,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default Home;

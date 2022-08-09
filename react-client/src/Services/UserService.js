@@ -7,7 +7,7 @@ export const register = api.register;
 export const logout = api.logout;
 
 export async function create(item) {
-  return await api.post(host + '/users', item);
+  return await api.post(host + '/users/create', item);
 }
 
 export async function edit(id, item) {

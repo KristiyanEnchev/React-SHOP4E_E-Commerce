@@ -1,12 +1,14 @@
 import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import AuthSlice from './AuthSlice.js';
-import BannerSlice from './BannerSlice.js';
-import ProductsSlice from './productsSlice.js';
-import productSlice from './productSlice.js';
-import cartSlice from './cartSlice.js';
-import modalSlice from './modalSlice.js';
+import AuthSlice from './Public/AuthSlice.js';
+import BannerSlice from './Public/BannerSlice.js';
+import ProductsSlice from './Public/productsSlice.js';
+import productSlice from './Public/productSlice.js';
+import cartSlice from './Public/cartSlice.js';
+import modalSlice from './Public/modalSlice.js';
+import UsersSlice from './Admin/UsersSlice.js';
+import UserSlice from './Admin/UserSlice.js';
 
 const reducer = {
   auth: AuthSlice,
@@ -15,6 +17,9 @@ const reducer = {
   product: productSlice,
   cart: cartSlice,
   modal: modalSlice,
+
+  users: UsersSlice,
+  user: UserSlice,
 };
 
 const store = configureStore(

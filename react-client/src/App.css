@@ -840,6 +840,17 @@ a:hover {
     margin-top: 5rem;
 }
 
+.mt-4 {
+    margin-top: 4rem;
+}
+
+.mt-3 {
+    margin-top: 3rem;
+}
+.mt-2 {
+    margin-top: 2rem;
+}
+
 @media screen and (max-width: 1000px) {
     .img-404 {
         width: 700px !important;

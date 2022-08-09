@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { Helmet } from 'react-helmet-async';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import { userLogin } from '../../redux/AuthSlice.js';
+import { userLogin } from '../../redux/Public/AuthSlice.js';
 import { emailValidator, passwordValidator } from './Validators.js';
 
 import './Authentication.css';

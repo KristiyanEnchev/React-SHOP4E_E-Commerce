@@ -21,7 +21,7 @@ export const PageNotFound = () => {
           />
           <div>
             <h2 className="text-404 text-grey">You can get back to our</h2>
-            <button className="mt-5 btn btn-primary btn-404 text-uppercase">
+            <button className="btn btn-primary btn-404 text-uppercase">
               <Link
                 className="mt-5 btn btn-primary btn-404 text-uppercase"
                 to={'/'}

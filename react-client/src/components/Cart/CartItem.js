@@ -2,7 +2,11 @@ import React from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { useDispatch } from 'react-redux';
-import { removeItem, increase, decrease } from '../../redux/cartSlice.js';
+import {
+  removeItem,
+  increase,
+  decrease,
+} from '../../redux/Public/cartSlice.js';
 
 export const CartItem = (item) => {
   const dispatch = useDispatch();

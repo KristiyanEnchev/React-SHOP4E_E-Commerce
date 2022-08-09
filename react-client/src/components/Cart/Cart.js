@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartItem } from './CartItem.js';
-import { closeModal } from '../../redux/modalSlice.js';
-import { clearCart } from '../../redux/cartSlice.js';
+import { closeModal } from '../../redux/Public/modalSlice.js';
+import { clearCart } from '../../redux/Public/cartSlice.js';
+import { UserActions } from '../../Admin/components/Users/Helpers/UserListConstants.js';
 // import toast from 'react-hot-toast';
 
 // import getStripe from '../lib/getStripe';
@@ -18,7 +19,7 @@ const Cart = () => {
 
   const handleClear = () => {
     dispatch(clearCart());
-    dispatch(closeModal());
+    dispatch(closeModal({ action: UserActions.Close }));
   };
 
   const handleCheckout = async () => {
@@ -43,7 +44,7 @@ const Cart = () => {
           <button
             className="heading-cart"
             type="button"
-            onClick={() => dispatch(closeModal())}
+            onClick={() => dispatch(closeModal({ action: UserActions.Close }))}
           >
             <AiOutlineLeft />
             <span className="heading">Your Cart</span>
@@ -65,7 +66,9 @@ const Cart = () => {
             <Link to="/">
               <button
                 type="button"
-                onClick={() => dispatch(closeModal())}
+                onClick={() =>
+                  dispatch(closeModal({ action: UserActions.Close }))
+                }
                 className="btn"
               >
                 Continue Shopping

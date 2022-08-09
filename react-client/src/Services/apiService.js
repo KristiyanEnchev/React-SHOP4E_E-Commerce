@@ -7,13 +7,14 @@ export async function request(url, options) {
     const response = await fetch(url, options);
 
     if (response.ok === false) {
-      if (response.status === 401) {
-        sessionStorage.removeItem('email');
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('userId');
-        sessionStorage.removeItem('name');
-        sessionStorage.removeItem('isAdmin');
-      }
+      // if (response.status === 401) {
+      //   sessionStorage.removeItem('email');
+      //   sessionStorage.removeItem('token');
+      //   sessionStorage.removeItem('avatar');
+      //   sessionStorage.removeItem('userId');
+      //   sessionStorage.removeItem('name');
+      //   sessionStorage.removeItem('isAdmin');
+      // }
       const error = await response.json();
       throw new Error(error.message);
     }
@@ -38,7 +39,7 @@ function getOptions(method = 'get', body) {
 
   const token = sessionStorage.getItem('token');
   if (token != null) {
-    options.headers.authorization = token;
+    options.headers.authorization = 'Bearer ' + token;
   }
 
   if (body) {

@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { register } from '../../Services/UserService';
-import { getError } from '../../ustils.js';
+import { getError } from '../../utils.js';
 import {
   confirmPasswordValidator,
   emailValidator,

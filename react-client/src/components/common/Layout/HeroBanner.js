@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getBanners } from '../../../redux/BannerSlice.js';
+import { getBanners } from '../../../redux/Public/BannerSlice.js';
 import { Loader } from '../Loader/Loader.js';
 
 const HeroBanner = () => {

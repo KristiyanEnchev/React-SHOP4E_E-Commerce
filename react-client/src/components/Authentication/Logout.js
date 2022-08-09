@@ -1,14 +1,14 @@
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectCurrentToken } from '../../redux/AuthSlice.js';
+import { selectCurrentToken } from '../../redux/Public/AuthSlice.js';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logOut } from '../../redux/AuthSlice.js';
+import { logOut } from '../../redux/Public/AuthSlice.js';
 import * as userService from '../../Services/UserService.js';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
-const RequireAuth = () => {
+const Logout = () => {
   const token = useSelector(selectCurrentToken);
   const location = useLocation();
   const dispatch = useDispatch();
@@ -30,4 +30,4 @@ const RequireAuth = () => {
     <Navigate to="/login" state={{ from: location }} replace />
   );
 };
-export default RequireAuth;
+export default Logout;

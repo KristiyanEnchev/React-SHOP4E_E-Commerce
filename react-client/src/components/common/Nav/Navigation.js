@@ -16,16 +16,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import MenuIcon from '@mui/icons-material/Menu';
-import {
-  selectCurrentToken,
-  selectIsAdmin,
-  selectUserImage,
-} from '../../../redux/AuthSlice.js';
 import Cart from '../../Cart/Cart.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { calculateTotals } from '../../../redux/cartSlice.js';
-import { openModal } from '../../../redux/modalSlice.js';
+import { calculateTotals } from '../../../redux/Public/cartSlice.js';
+import { openModal } from '../../../redux/Public/modalSlice.js';
+import { UserActions } from '../../../Admin/components/Users/Helpers/UserListConstants.js';
 
 const pages = ['login', 'register'];
 const settings = ['Profile', 'Orders', 'Logout'];
@@ -33,10 +29,9 @@ const settings = ['Profile', 'Orders', 'Logout'];
 const Navigation = () => {
   const blankPictueUrl =
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png';
-  const isAuth = useSelector(selectCurrentToken);
-  const avatar = useSelector(selectUserImage);
-  const isAdmin = useSelector(selectIsAdmin);
-  const { isOpen } = useSelector((state) => state.modal);
+  const { avatar, isAdmin, token } = useSelector((state) => state.auth);
+
+  const { isOpen, userAction } = useSelector((state) => state.modal);
   const { amount } = useSelector((store) => store.cart);
   const { cartItems } = useSelector((store) => store.cart);
 
@@ -44,7 +39,7 @@ const Navigation = () => {
 
   useEffect(() => {
     dispatch(calculateTotals());
-  }, [cartItems, dispatch]);
+  }, [cartItems, dispatch, isAdmin]);
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -87,7 +82,7 @@ const Navigation = () => {
             >
               <MenuIcon />
             </IconButton>
-            {!isAuth ? (
+            {!token ? (
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
@@ -122,7 +117,7 @@ const Navigation = () => {
             ) : (
               ''
             )}
-            {isAdmin ? (
+            {isAdmin === true ? (
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
@@ -158,7 +153,7 @@ const Navigation = () => {
             )}
           </Box>
 
-          {!isAuth ? (
+          {!token ? (
             <Box
               display="flex"
               justifyContent="end"
@@ -179,7 +174,7 @@ const Navigation = () => {
           ) : (
             ''
           )}
-          {isAdmin ? (
+          {isAdmin === true ? (
             <Box
               className="avtr"
               sx={{ flexGrow: 2, display: { xs: 'none', md: 'flex' } }}
@@ -204,14 +199,20 @@ const Navigation = () => {
             justifyContent="end"
             sx={{ flexGrow: 3, display: { xs: 'flex', md: 'flex' } }}
           >
-            <MenuItem onClick={() => dispatch(openModal())}>
+            <MenuItem
+              onClick={() =>
+                dispatch(
+                  openModal({ isOpen: true, action: UserActions.OpenCart })
+                )
+              }
+            >
               <Badge badgeContent={amount} color="primary">
                 <ShoppingCartOutlined />
               </Badge>
             </MenuItem>
           </Box>
 
-          {isAuth ? (
+          {token ? (
             <Box
               className="avtr"
               display="flex"
@@ -263,7 +264,7 @@ const Navigation = () => {
             ''
           )}
         </Toolbar>
-        {isOpen && <Cart />}
+        {isOpen && userAction === 'openCart' && <Cart />}
       </Container>
     </AppBar>
   );

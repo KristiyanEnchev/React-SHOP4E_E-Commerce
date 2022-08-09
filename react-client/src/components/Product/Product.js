@@ -9,10 +9,16 @@ import {
 // IoStarHalf,
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addToCart } from '../../redux/cartSlice.js';
-import { openModal } from '../../redux/modalSlice.js';
-import { getProductBySlug, selectProduct } from '../../redux/productSlice.js';
-import { getProducts, selectProducts } from '../../redux/productsSlice.js';
+import { addToCart } from '../../redux/Public/cartSlice.js';
+import { openModal } from '../../redux/Public/modalSlice.js';
+import {
+  getProductBySlug,
+  selectProduct,
+} from '../../redux/Public/productSlice.js';
+import {
+  getProducts,
+  selectProducts,
+} from '../../redux/Public/productsSlice.js';
 import { Loader } from '../common/Loader/Loader.js';
 
 import { ProductCard } from './ProductCard.js';

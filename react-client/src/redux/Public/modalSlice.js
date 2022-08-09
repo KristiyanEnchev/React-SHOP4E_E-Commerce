@@ -1,6 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { UserActions } from '../../Admin/components/Users/Helpers/UserListConstants.js';
 
 const initialState = {
+  userId: '',
+  userAction: UserActions.Close,
   isOpen: false,
 };
 
@@ -10,9 +13,13 @@ const modalSlice = createSlice({
   reducers: {
     openModal: (state, action) => {
       state.isOpen = true;
+      state.userAction = action.payload.action;
+      state.userId = action.payload.userId;
     },
     closeModal: (state, action) => {
       state.isOpen = false;
+      state.action = UserActions.Close;
+      state.userId = '';
     },
   },
 });

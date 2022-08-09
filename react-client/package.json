@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
     "@mui/icons-material": "^5.8.4",
@@ -8,6 +9,7 @@
     "@mui/styled-engine-sc": "^5.8.0",
     "@reduxjs/toolkit": "^1.8.3",
     "canvas-confetti": "^1.5.1",
+    "ra-data-simple-rest": "^4.2.6",
     "react": "^18.2.0",
     "react-admin": "^4.2.4",
     "react-bootstrap": "^2.4.0",
