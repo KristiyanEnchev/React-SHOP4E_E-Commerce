@@ -8,6 +8,8 @@
 *.sln.docstates
 *.env
 
+
+/.vscode
 env
 .env
 /.env

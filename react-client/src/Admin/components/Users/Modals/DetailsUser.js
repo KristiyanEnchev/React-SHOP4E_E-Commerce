@@ -12,7 +12,7 @@ export const DetailsUser = ({ userId }) => {
 
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.user);
-  const { name, profile } = user;
+  const { name, avatar, firstName, lastName } = user;
 
   useEffect(() => {
     dispatch(findUserById(userId));
@@ -58,9 +58,9 @@ export const DetailsUser = ({ userId }) => {
               <div className="content">
                 <div className="image-container">
                   <img
-                    src={profile.avatar || blankPictueUrl}
+                    src={avatar || blankPictueUrl}
                     alt="user-pic"
-                    className="image-admin image-admin-profile"
+                    className="image-admin image-profile"
                   />
                 </div>
                 <div className="user-details">
@@ -71,7 +71,7 @@ export const DetailsUser = ({ userId }) => {
                     Full Name:
                     <strong>
                       {' '}
-                      {profile.firstName} {profile.lastName}{' '}
+                      {firstName} {lastName}{' '}
                     </strong>
                   </p>
                   <p>

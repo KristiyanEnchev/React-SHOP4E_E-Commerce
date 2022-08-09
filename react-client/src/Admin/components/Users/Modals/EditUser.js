@@ -24,18 +24,19 @@ export const EditUser = ({ userId }) => {
   const [errors, setErrors] = useState({});
 
   const changeHandler = (e) => {
-    console.log(e.target.value);
-    console.log(e.target.value);
-    dispatch(setUser({ [e.target.name]: e.target.value }));
+    dispatch(
+      setUser({
+        ...user,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     const { avatar, firstName, lastName, ...userData } = user;
     userData.profile = { avatar, firstName, lastName };
     userData._id = user._id;
-
     dispatch(updateUser(userData));
     dispatch(closeModal({ action: UserActions.Close }));
   };
@@ -45,15 +46,21 @@ export const EditUser = ({ userId }) => {
       e.target.name === 'email'
         ? { ...state, [e.target.name]: emailValidator(user.email) }
         : e.target.name === 'firstName'
-        ? { ...state, [e.target.name]: firstNameValidator(user.firstName) }
+        ? {
+            ...state,
+            [e.target.name]: firstNameValidator(user.firstName),
+          }
         : e.target.name === 'name'
         ? { ...state, [e.target.name]: nameValidator(user.name) }
         : e.target.name === 'lastName'
-        ? { ...state, [e.target.name]: lastNameValidator(user.lastName) }
+        ? {
+            ...state,
+            [e.target.name]: lastNameValidator(user.lastName),
+          }
         : { ...state, [e.target.name]: avatarValidator(user.avatar) }
     );
   };
-  console.log(errors);
+
   const isFormValid = !Object.values(errors).some((x) => x);
 
   if (loading) {
@@ -101,7 +108,7 @@ export const EditUser = ({ userId }) => {
                         name="firstName"
                         type="text"
                         defaultValue={user.firstName}
-                        onChange={changeHandler}
+                        onChange={(e) => changeHandler(e)}
                         onBlur={(e) => validator(e)}
                       />
                     </div>
@@ -120,7 +127,7 @@ export const EditUser = ({ userId }) => {
                         name="lastName"
                         type="text"
                         defaultValue={user.lastName}
-                        onChange={changeHandler}
+                        onChange={(e) => changeHandler(e)}
                         onBlur={(e) => validator(e)}
                       />
                     </div>
@@ -141,7 +148,7 @@ export const EditUser = ({ userId }) => {
                         name="email"
                         type="text"
                         defaultValue={user.email}
-                        onChange={changeHandler}
+                        onChange={(e) => changeHandler(e)}
                         onBlur={(e) => validator(e)}
                       />
                     </div>
@@ -160,7 +167,7 @@ export const EditUser = ({ userId }) => {
                         name="name"
                         type="text"
                         defaultValue={user.name}
-                        onChange={changeHandler}
+                        onChange={(e) => changeHandler(e)}
                         onBlur={(e) => validator(e)}
                       />
                     </div>
@@ -178,7 +185,7 @@ export const EditUser = ({ userId }) => {
                       name="avatar"
                       type="text"
                       defaultValue={user.avatar}
-                      onChange={changeHandler}
+                      onChange={(e) => changeHandler(e)}
                       onBlur={(e) => validator(e)}
                     />
                   </div>

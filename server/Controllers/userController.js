@@ -31,6 +31,10 @@ export const updateUser = expressAsyncHandler(async (req, res) => {
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
+    user.profile.firtsName =
+      req.body.profile.firstName || user.profile.firtsName;
+    user.profile.lastName = req.body.profile.lastName || user.profile.lastName;
+    user.profile.avatar = req.body.profile.avatar || user.profile.avatar;
     user.isAdmin = Boolean(req.body.isAdmin);
     const updatedUser = await user.save();
     res.send({ message: 'User Updated', user: updatedUser });
