@@ -1,7 +1,7 @@
 # React-SHOP4E_E-Commerce
 
 ## Overview
-Shop4e is a demo E-comerce Sneakers store made for project defence in Softuni, for the course of React.js. Have been made with React , Redux , Redux-toolkit, Material-Ui, React -Bootstrap
+Shop4e is a demo E-comerce Sneakers store made for project defence in Softuni, for the course of React.js. Have been made with React , Redux , Redux-toolkit, Material-Ui, React -Bootstrap, MongoDb, Express.js, Mongoose.js 
 
 
 ## Accounts avaible for testing 
