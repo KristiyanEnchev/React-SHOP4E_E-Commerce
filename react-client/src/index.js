@@ -8,20 +8,23 @@ import { Provider } from 'react-redux';
 import store from './redux/store.js';
 import './App.css';
 import { AdminPanel } from './Admin/AdminPanel.js';
+import { ContextProvider } from './Admin/contexts/ContextProvider.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <HelmetProvider>
       <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/*" element={<App />}></Route>
-            <Route element={<RequireAuthorization />}>
-              <Route path="/admin/*" element={<AdminPanel />}></Route>
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <ContextProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/*" element={<App />}></Route>
+              <Route element={<RequireAuthorization />}>
+                <Route path="/admin/*" element={<AdminPanel />}></Route>
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </ContextProvider>
       </Provider>
     </HelmetProvider>
   </React.StrictMode>

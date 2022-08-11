@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+.btn-style-t {
+    color: rgb(223, 223, 223) !important;
+    border-radius: 5rem;
+    height: 53px;
+    border: none !important;
+    background-color: rgb(40, 77, 183);
+    font-size: 30px !important;
+}
+
+.btn-style-b {
+    color: rgb(255, 255, 255) !important;
+    border-radius: 5rem;
+    height: 53px;
+    border: none !important;
+    background-color: rgb(184, 184, 184);
+    font-size: 30px !important;
+}
+
+.btn-style-b:hover {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(184, 184, 184) !important;
+}
+
+.btn-nb {
+    border: none !important;
+}
+
+.btn-round {
+    height: 50px;
+    border-radius: 5rem;
+}
+
+.btn-size {
+    font-size: 30px !important;
+}
+
+.btn-transp {
+    border: none !important;
+    background-color: transparent;
+}
+
+/* @tailwind base; */
+/* @tailwind components; */
+@tailwind utilities;
