@@ -13,6 +13,7 @@ import './index.css';
 import { useStateContext } from './contexts/ContextProvider.js';
 import { Tooltip } from '@mui/material';
 import { Toaster } from 'react-hot-toast';
+import { Home } from './components/Home/Home.js';
 
 export const AdminPanel = () => {
   const {
@@ -75,6 +76,7 @@ export const AdminPanel = () => {
               {themeSettings && <ThemeSettings />}
 
               <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/products" element={<Products />} />
               </Routes>

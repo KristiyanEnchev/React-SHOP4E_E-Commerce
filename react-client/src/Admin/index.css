@@ -724,3 +724,9 @@ ul {
     background-color: white;
     border-color: #333333;
 }
+
+.image_admin_guard {
+    width: 80%;
+    height: 90%;
+    margin-left: 2rem;
+}
