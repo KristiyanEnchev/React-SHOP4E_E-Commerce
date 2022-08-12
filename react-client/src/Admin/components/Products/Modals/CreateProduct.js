@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiOutlineShoppingCart, AiFillDollarCircle } from 'react-icons/ai';
+import { BiCategoryAlt } from 'react-icons/bi';
+import { TbShoppingCartDiscount } from 'react-icons/tb';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../../../redux/Public/modalSlice.js';
 import { createProduct } from '../../../../redux/Public/productsSlice.js';
@@ -122,7 +124,7 @@ export const CreateProduct = () => {
                 <label htmlFor="price">Price</label>
                 <div className="input-wrapper">
                   <span>
-                    <i className="fa-solid fa-user" />
+                    <AiFillDollarCircle />
                   </span>
                   <input
                     id="price"
@@ -162,7 +164,7 @@ export const CreateProduct = () => {
                 <label htmlFor="category">Category</label>
                 <div className="input-wrapper">
                   <span>
-                    <i className="fa-solid fa-phone" />
+                    <BiCategoryAlt />
                   </span>
                   <input
                     id="category"
@@ -202,7 +204,7 @@ export const CreateProduct = () => {
                 <label htmlFor="countInStock">Count In Stock</label>
                 <div className="input-wrapper">
                   <span>
-                    <i className="fa-solid fa-user" />
+                    <TbShoppingCartDiscount />
                   </span>
                   <input
                     id="countInStock"

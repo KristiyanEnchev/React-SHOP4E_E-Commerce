@@ -160,7 +160,7 @@ export const EditUser = ({ objectId }) => {
                     <label htmlFor="name">Name</label>
                     <div className="input-wrapper">
                       <span>
-                        <i className="fa-solid fa-phone" />
+                        <i className="fa-solid fa-user" />
                       </span>
                       <input
                         id="name"

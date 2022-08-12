@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiOutlineShoppingCart, AiFillDollarCircle } from 'react-icons/ai';
+import { BiCategoryAlt } from 'react-icons/bi';
+import { TbShoppingCartDiscount } from 'react-icons/tb';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   countInStockValidator,
@@ -139,7 +141,7 @@ export const EditProduct = ({ objectId }) => {
                     <label htmlFor="price">Price</label>
                     <div className="input-wrapper">
                       <span>
-                        <i className="fa-solid fa-user" />
+                        <AiFillDollarCircle />
                       </span>
                       <input
                         id="price"
@@ -181,7 +183,7 @@ export const EditProduct = ({ objectId }) => {
                     <label htmlFor="category">Category</label>
                     <div className="input-wrapper">
                       <span>
-                        <i className="fa-solid fa-phone" />
+                        <BiCategoryAlt />
                       </span>
                       <input
                         id="category"
@@ -221,7 +223,7 @@ export const EditProduct = ({ objectId }) => {
                     <label htmlFor="countInStock">Count In Stock</label>
                     <div className="input-wrapper">
                       <span>
-                        <i className="fa-solid fa-user" />
+                        <TbShoppingCartDiscount />
                       </span>
                       <input
                         id="countInStock"

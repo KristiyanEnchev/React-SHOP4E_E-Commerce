@@ -25,9 +25,9 @@ const Users = () => {
     const confirm = window.confirm('Are you sure you want to delete this');
     if (confirm) {
       dispatch(deleteUser(userID));
+    } else {
+      toast.error('Deletion stoped');
     }
-
-    toast.error('Deletion stoped');
   };
 
   const { users } = useSelector(selectUsers);

@@ -39,8 +39,8 @@ const authSlice = createSlice({
     setCredentials: (state, action) => {
       const { _id, name, isAdmin, email, token } = action.payload;
       state._id = _id;
-      state.email = email;
       state.token = token;
+      state.email = email;
       state.name = name;
       state.isAdmin = isAdmin;
     },

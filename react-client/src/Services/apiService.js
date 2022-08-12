@@ -7,14 +7,14 @@ export async function request(url, options) {
     const response = await fetch(url, options);
 
     if (response.ok === false) {
-      // if (response.status === 401) {
-      //   sessionStorage.removeItem('email');
-      //   sessionStorage.removeItem('token');
-      //   sessionStorage.removeItem('avatar');
-      //   sessionStorage.removeItem('userId');
-      //   sessionStorage.removeItem('name');
-      //   sessionStorage.removeItem('isAdmin');
-      // }
+      if (response.status === 401) {
+        sessionStorage.removeItem('email');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('avatar');
+        sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('name');
+        sessionStorage.removeItem('isAdmin');
+      }
       const error = await response.json();
       throw new Error(error.message);
     }
@@ -72,6 +72,7 @@ export async function login(email, password) {
     password,
   });
 
+  sessionStorage.setItem('_id', result._id);
   sessionStorage.setItem('token', result.token);
   sessionStorage.setItem('avatar', result.avatar);
   sessionStorage.setItem('userId', result._id);

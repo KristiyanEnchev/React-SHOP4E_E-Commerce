@@ -5,9 +5,9 @@ import * as controller from '../Controllers/userController.js';
 const userRouter = express.Router();
 
 userRouter.get('/', isAuth, isAdmin, controller.getAll);
-userRouter.get('/:userId', isAuth, controller.getUser);
+userRouter.get('/:userId', isAdmin, isAuth, controller.getUser);
 userRouter.post('/create', isAdmin, isAuth, controller.createUser);
-userRouter.put('/:userId', isAuth, isAdmin, controller.updateUser);
+userRouter.put('/:userId', isAuth, controller.updateUser);
 userRouter.delete('/:userId', isAuth, isAdmin, controller.deleteUser);
 
 export default userRouter;

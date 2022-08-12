@@ -28,9 +28,9 @@ const Products = () => {
     const confirm = window.confirm('Are you sure you want to delete this');
     if (confirm) {
       dispatch(deleteProduct(productID));
+    } else {
+      toast.error('Deletion stoped');
     }
-
-    toast.error('Deletion stoped');
   };
 
   useEffect(() => {

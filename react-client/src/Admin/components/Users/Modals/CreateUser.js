@@ -151,7 +151,7 @@ export const CreateUser = () => {
                 <label htmlFor="name">Name</label>
                 <div className="input-wrapper">
                   <span>
-                    <i className="fa-solid fa-phone" />
+                    <i className="fa-solid fa-user" />
                   </span>
                   <input
                     id="name"
@@ -190,7 +190,7 @@ export const CreateUser = () => {
               <label htmlFor="Password">Password</label>
               <div className="input-wrapper">
                 <span>
-                  <i className="fa-solid fa-image" />
+                  <i className="fa-solid fa-envelope" />
                 </span>
                 <input
                   id="password"
