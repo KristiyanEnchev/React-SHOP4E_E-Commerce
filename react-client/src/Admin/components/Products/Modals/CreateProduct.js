@@ -1,32 +1,37 @@
 import React, { useState } from 'react';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
-import { createUser } from '../../../../redux/Admin/UsersSlice.js';
 import { closeModal } from '../../../../redux/Public/modalSlice.js';
+import { createProduct } from '../../../../redux/Public/productsSlice.js';
 import { UserActions } from '../../Helpers/UserListConstants.js';
 
-export const CreateUser = () => {
+export const CreateProduct = () => {
   const dispatch = useDispatch();
 
-  const [errors, setErrors] = useState({ initialError: true });
+  const [errors, setErrors] = useState({ initialError: 'Form is Empty' });
   const [values, setValues] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
     name: '',
-    avatar: '',
-    password: '',
+    slug: '',
+    image: '',
+    images: '',
+    category: '',
+    description: '',
+    price: '',
+    countInStock: '',
   });
 
   const changeHandler = (e) => {
     if (
-      values.avatar !== '' &&
-      values.firstName !== '' &&
-      values.lastName !== '' &&
-      values.email !== '' &&
       values.name !== '' &&
-      values.password !== ''
+      values.slug !== '' &&
+      values.image !== '' &&
+      values.images !== '' &&
+      values.category !== '' &&
+      values.description !== '' &&
+      values.price !== '' &&
+      values.countInStock !== ''
     ) {
-      setErrors({ initialError: false });
+      setErrors({ initialError: '' });
     }
     setValues((state) => ({
       ...state,
@@ -37,9 +42,9 @@ export const CreateUser = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const { avatar, firstName, lastName, ...userData } = values;
-    userData.profile = { avatar, firstName, lastName };
-    dispatch(createUser(userData));
+    const { ...newProduct } = values;
+
+    dispatch(createProduct(newProduct));
     dispatch(closeModal({ action: UserActions.Close }));
   };
 
@@ -50,9 +55,17 @@ export const CreateUser = () => {
     }));
   };
 
-  const isFormValid = !Object.values(errors).some((x) => x);
+  const isPositive = (e) => {
+    let number = Number(e.target.value);
 
-  console.log(errors);
+    setErrors((state) => ({
+      ...state,
+      [e.target.name]: number < 0,
+      [e.target.name]: values[e.target.name].length < 1,
+    }));
+  };
+
+  const isFormValid = !Object.values(errors).some((x) => x);
 
   return (
     <div className="overlay">
@@ -60,7 +73,7 @@ export const CreateUser = () => {
       <div className="modal">
         <div className="user-container">
           <header className="headers">
-            <h2>Create User</h2>
+            <h2>Create Product</h2>
             <button
               className="btn-admin close"
               onClick={() => dispatch(closeModal())}
@@ -85,73 +98,10 @@ export const CreateUser = () => {
           <form onSubmit={submitHandler}>
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="firstName">First name</label>
+                <label htmlFor="name">Product name</label>
                 <div className="input-wrapper">
                   <span>
-                    <i className="fa-solid fa-user" />
-                  </span>
-                  <input
-                    id="firstName"
-                    name="firstName"
-                    type="text"
-                    value={values.firstName}
-                    onChange={changeHandler}
-                    onBlur={(e) => minLength(e, 3)}
-                  />
-                </div>
-                {errors.firstName && (
-                  <p className="form-error">
-                    First name should be at least 3 characters long!
-                  </p>
-                )}
-              </div>
-              <div className="form-group">
-                <label htmlFor="lastName">Last name</label>
-                <div className="input-wrapper">
-                  <span>
-                    <i className="fa-solid fa-user" />
-                  </span>
-                  <input
-                    id="lastName"
-                    name="lastName"
-                    type="text"
-                    value={values.lastName}
-                    onChange={changeHandler}
-                    onBlur={(e) => minLength(e, 3)}
-                  />
-                </div>
-                {errors.lastName && (
-                  <p className="form-error">
-                    Last name should be at least 3 characters long!
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <div className="input-wrapper">
-                  <span>
-                    <i className="fa-solid fa-envelope" />
-                  </span>
-                  <input
-                    id="email"
-                    name="email"
-                    type="text"
-                    value={values.email}
-                    onChange={changeHandler}
-                    onBlur={(e) => minLength(e, 5)}
-                  />
-                </div>
-                {errors.email && (
-                  <p className="form-error">Email is not valid!</p>
-                )}
-              </div>
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <div className="input-wrapper">
-                  <span>
-                    <i className="fa-solid fa-phone" />
+                    <AiOutlineShoppingCart />
                   </span>
                   <input
                     id="name"
@@ -159,52 +109,135 @@ export const CreateUser = () => {
                     type="text"
                     value={values.name}
                     onChange={changeHandler}
-                    onBlur={(e) => minLength(e, 6)}
+                    onBlur={(e) => minLength(e, 3)}
                   />
                 </div>
                 {errors.name && (
-                  <p className="form-error">Name is not valid!</p>
+                  <p className="form-error">
+                    Product name should be 3 characters long!
+                  </p>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="price">Price</label>
+                <div className="input-wrapper">
+                  <span>
+                    <i className="fa-solid fa-user" />
+                  </span>
+                  <input
+                    id="price"
+                    name="price"
+                    type="text"
+                    value={values.price}
+                    onChange={changeHandler}
+                    onBlur={(e) => isPositive(e)}
+                  />
+                </div>
+                {errors.price && (
+                  <p className="form-error">Price should be Positive number!</p>
+                )}
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="slug">Product Slug</label>
+                <div className="input-wrapper">
+                  <span>
+                    <i className="fa-solid fa-envelope" />
+                  </span>
+                  <input
+                    id="slug"
+                    name="slug"
+                    type="text"
+                    value={values.slug}
+                    onChange={changeHandler}
+                    onBlur={(e) => minLength(e, 2)}
+                  />
+                </div>
+                {errors.slug && (
+                  <p className="form-error">Product Slug is not valid!</p>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="category">Category</label>
+                <div className="input-wrapper">
+                  <span>
+                    <i className="fa-solid fa-phone" />
+                  </span>
+                  <input
+                    id="category"
+                    name="category"
+                    type="text"
+                    value={values.category}
+                    onChange={changeHandler}
+                    onBlur={(e) => minLength(e, 3)}
+                  />
+                </div>
+                {errors.category && (
+                  <p className="form-error">Category is not valid!</p>
+                )}
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="image">Product Image</label>
+                <div className="input-wrapper">
+                  <span>
+                    <i className="fa-solid fa-image" />
+                  </span>
+                  <input
+                    id="image"
+                    name="image"
+                    type="text"
+                    value={values.image}
+                    onChange={changeHandler}
+                    onBlur={(e) => minLength(e, 3)}
+                  />
+                </div>
+                {errors.image && (
+                  <p className="form-error">Product Image is not valid!</p>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="countInStock">Count In Stock</label>
+                <div className="input-wrapper">
+                  <span>
+                    <i className="fa-solid fa-user" />
+                  </span>
+                  <input
+                    id="countInStock"
+                    name="countInStock"
+                    type="text"
+                    value={values.countInStock}
+                    onChange={changeHandler}
+                    onBlur={(e) => isPositive(e)}
+                  />
+                </div>
+                {errors.countInStock && (
+                  <p className="form-error">
+                    countInStock should be Positive number!
+                  </p>
                 )}
               </div>
             </div>
             <div className="form-group long-line">
-              <label htmlFor="avatar">Avatar</label>
+              <label htmlFor="description">Description</label>
               <div className="input-wrapper">
-                <span>
-                  <i className="fa-solid fa-image" />
-                </span>
-                <input
-                  id="avatar"
-                  name="avatar"
+                <textarea
+                  className="text-admin"
+                  id="description"
+                  name="description"
                   type="text"
-                  value={values.avatar}
+                  value={values.description}
                   onChange={changeHandler}
-                  onBlur={(e) => minLength(e, 3)}
+                  onBlur={(e) => minLength(e, 10)}
                 />
               </div>
-              {errors.avatar && (
-                <p className="form-error">Image Avatar is not valid!</p>
+              {errors.description && (
+                <p className="form-error">description is not valid!</p>
               )}
             </div>
-            <div className="form-group long-line">
-              <label htmlFor="Password">Password</label>
-              <div className="input-wrapper">
-                <span>
-                  <i className="fa-solid fa-image" />
-                </span>
-                <input
-                  id="password"
-                  name="password"
-                  type="text"
-                  value={values.password}
-                  onChange={changeHandler}
-                  onBlur={(e) => minLength(e, 8)}
-                />
-              </div>
-              {errors.password && (
-                <p className="form-error">Password is not valid!</p>
-              )}
-            </div>
+
             <div id="form-actions">
               <button
                 id="action-save"

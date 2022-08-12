@@ -11,15 +11,15 @@ import { Loader } from '../../../../components/common/Loader/Loader.js';
 import { findUserById, setUser } from '../../../../redux/Admin/UserSlice.js';
 import { updateUser } from '../../../../redux/Admin/UsersSlice.js';
 import { closeModal } from '../../../../redux/Public/modalSlice.js';
-import { UserActions } from '../Helpers/UserListConstants.js';
+import { UserActions } from '../../Helpers/UserListConstants.js';
 
-export const EditUser = ({ userId }) => {
+export const EditUser = ({ objectId }) => {
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(findUserById(userId));
-  }, [userId, dispatch]);
+    dispatch(findUserById(objectId));
+  }, [objectId, dispatch]);
 
   const [errors, setErrors] = useState({});
 

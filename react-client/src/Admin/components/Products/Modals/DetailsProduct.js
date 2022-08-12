@@ -1,21 +1,24 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { printDate } from '../../Helpers/FormatHelper';
 import { Loader } from '../../../../components/common/Loader/Loader.js';
-import { findUserById } from '../../../../redux/Admin/UserSlice.js';
 import { closeModal } from '../../../../redux/Public/modalSlice.js';
-import { printDate } from '../../Helpers/FormatHelper.js';
 import { UserActions } from '../../Helpers/UserListConstants.js';
+import {
+  getProductById,
+  selectProduct,
+} from '../../../../redux/Public/productSlice.js';
 
-export const DetailsUser = ({ objectId }) => {
+export const DetailsProduct = ({ objectId }) => {
   const blankPictueUrl =
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png';
 
   const dispatch = useDispatch();
-  const { user, loading } = useSelector((state) => state.user);
-  const { name, avatar, firstName, lastName } = user;
+  const product = useSelector(selectProduct);
+  const { name, image, slug, category, loading } = product;
 
   useEffect(() => {
-    dispatch(findUserById(objectId));
+    dispatch(getProductById(objectId));
   }, [dispatch, objectId]);
 
   return (
@@ -31,7 +34,7 @@ export const DetailsUser = ({ objectId }) => {
           <div className="modal">
             <div className="detail-container">
               <header className="headers">
-                <h2>User Detail</h2>
+                <h2>Product Detail</h2>
                 <button
                   className="btn-admin close"
                   onClick={() =>
@@ -58,34 +61,35 @@ export const DetailsUser = ({ objectId }) => {
               <div className="content">
                 <div className="image-container">
                   <img
-                    src={avatar || blankPictueUrl}
+                    src={image || blankPictueUrl}
                     alt="user-pic"
                     className="image-admin image-profile"
                   />
                 </div>
                 <div className="user-details">
                   <p>
-                    User Id: <strong>{user._id}</strong>
+                    Product Id: <strong>{product._id}</strong>
                   </p>
                   <p>
-                    Full Name:
-                    <strong>
-                      {' '}
-                      {firstName} {lastName}{' '}
-                    </strong>
+                    Name:
+                    <strong> {name} </strong>
                   </p>
                   <p>
-                    Email: <strong>{user.email}</strong>
+                    Category: <strong>{category}</strong>
                   </p>
                   <p>
-                    Name: <strong>{name}</strong>
+                    Slug: <strong>{slug}</strong>
                   </p>
 
                   <p>
-                    Created on: <strong>{printDate(user.createdAt)}</strong>
+                    In Stock: <strong>{product.countInStock}</strong>
+                  </p>
+
+                  <p>
+                    Created on: <strong>{printDate(product.createdAt)}</strong>
                   </p>
                   <p>
-                    Modified on: <strong>{printDate(user.updatedAt)}</strong>
+                    Modified on: <strong>{printDate(product.updatedAt)}</strong>
                   </p>
                 </div>
               </div>

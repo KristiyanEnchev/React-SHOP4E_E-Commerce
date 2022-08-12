@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { calculateTotals } from '../../../redux/Public/cartSlice.js';
 import { openModal } from '../../../redux/Public/modalSlice.js';
-import { UserActions } from '../../../Admin/components/Users/Helpers/UserListConstants.js';
+import { UserActions } from '../../../Admin/components/Helpers/UserListConstants.js';
 
 const pages = ['login', 'register'];
 const settings = ['Profile', 'Orders', 'Logout'];

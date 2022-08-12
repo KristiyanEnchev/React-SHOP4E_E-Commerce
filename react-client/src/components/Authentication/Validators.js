@@ -60,3 +60,64 @@ export const avatarValidator = (avatar) => {
   }
   return '';
 };
+
+export const productImageValidator = (avatar) => {
+  if (!avatar) {
+    return 'Product Image is required';
+  }
+  return '';
+};
+
+export const productNameValidator = (name) => {
+  if (!name) {
+    return 'Product name is required';
+  } else if (name.length < 3) {
+    return 'Incorrect Product name format, must be more than 3';
+  }
+  return '';
+};
+
+export const priceValidator = (price) => {
+  if (!price) {
+    return 'Product price is required';
+  } else if (Number(price) < 0) {
+    return 'Incorrect Price should be positive';
+  }
+  return '';
+};
+
+export const productSlugValidator = (slug) => {
+  if (!slug) {
+    return 'Product slug is required';
+  } else if (slug.length < 3) {
+    return 'Incorrect Product slug format, must be more than 3';
+  }
+  return '';
+};
+
+export const productCategoryValidator = (category) => {
+  if (!category) {
+    return 'Product slug is required';
+  } else if (category.length < 3) {
+    return 'Incorrect Product category format, must be more than 3';
+  }
+  return '';
+};
+
+export const countInStockValidator = (count) => {
+  if (!count) {
+    return 'Product count in stock is required';
+  } else if (Number(count) < 0) {
+    return 'Incorrect Count in stock should be positive';
+  }
+  return '';
+};
+
+export const descriptionValidator = (description) => {
+  if (!description) {
+    return 'Product description is required';
+  } else if (description.length < 20) {
+    return 'Incorrect Product description format, must be more than 20';
+  }
+  return '';
+};

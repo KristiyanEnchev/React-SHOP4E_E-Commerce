@@ -50,7 +50,7 @@ export const deleteUser = expressAsyncHandler(async (req, res) => {
   if (user) {
     if (user.email === 'admin@example.com') {
       // throw new RequestError('Can Not Delete Admin User');
-      res.status(400).send({ message: 'Can Not Delete Admin User' });
+      return res.status(400).send({ message: 'Can Not Delete Admin User' });
     }
     await user.remove();
     res.send({ message: 'User Deleted' });

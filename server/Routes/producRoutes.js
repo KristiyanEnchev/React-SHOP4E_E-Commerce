@@ -8,7 +8,7 @@ productRouter.get('/', controller.getAllProducts);
 productRouter.get('/banners', controller.getBanners);
 
 productRouter.get('/:slug', controller.getProductBySlug);
-productRouter.get('/:productId', isAuth, controller.getProductById);
+productRouter.get('/get/:productId', isAuth, controller.getProductById);
 
 productRouter.post('/', isAuth, isAdmin, controller.createProduct);
 productRouter.put('/:productId', isAuth, isAdmin, controller.editProduct);

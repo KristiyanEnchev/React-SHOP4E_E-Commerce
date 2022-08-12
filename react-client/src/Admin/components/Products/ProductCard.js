@@ -1,27 +1,27 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../../redux/Public/modalSlice.js';
-import { printDate } from '../../components/Helpers/FormatHelper';
-import { UserActions } from '../../components/Helpers/UserListConstants.js';
+import { printDate } from '../Helpers/FormatHelper.js';
+import { UserActions } from '../Helpers/UserListConstants.js';
 
-export const UserCard = ({ user, deleteHandler }) => {
+export const ProductCard = ({ product, deleteHandler }) => {
   const blankPictueUrl =
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png';
-  const { createdAt, email, profile, name } = user;
-  const { avatar } = profile;
+  const { createdAt, price, image, name } = product;
+
   const dispatch = useDispatch();
 
   return (
     <>
       <td>
         <img
-          src={avatar || blankPictueUrl}
-          alt={`${user.name}'s profile`}
+          src={image || blankPictueUrl}
+          alt={`${product.name}'s profile`}
           className="image-admin image-admin-profile"
         />
       </td>
       <td>{name}</td>
-      <td>{email}</td>
+      <td>{price}</td>
       <td>{printDate(createdAt)}</td>
 
       <td className="actions">
@@ -30,7 +30,7 @@ export const UserCard = ({ user, deleteHandler }) => {
           title="Edit"
           onClick={() =>
             dispatch(
-              openModal({ objectId: user._id, action: UserActions.Edit })
+              openModal({ objectId: product._id, action: UserActions.Edit })
             )
           }
         >
@@ -53,7 +53,7 @@ export const UserCard = ({ user, deleteHandler }) => {
         <button
           className="btn-admin delete-btn"
           title="Delete"
-          onClick={(e) => deleteHandler(e, user._id, UserActions.Delete)}
+          onClick={(e) => deleteHandler(e, product._id, UserActions.Delete)}
         >
           <svg
             aria-hidden="true"
@@ -76,7 +76,7 @@ export const UserCard = ({ user, deleteHandler }) => {
           title="Info"
           onClick={() =>
             dispatch(
-              openModal({ objectId: user._id, action: UserActions.Details })
+              openModal({ objectId: product._id, action: UserActions.Details })
             )
           }
         >

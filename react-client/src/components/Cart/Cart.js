@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CartItem } from './CartItem.js';
 import { closeModal } from '../../redux/Public/modalSlice.js';
 import { clearCart } from '../../redux/Public/cartSlice.js';
-import { UserActions } from '../../Admin/components/Users/Helpers/UserListConstants.js';
+import { UserActions } from '../../Admin/components/Helpers/UserListConstants.js';
 // import toast from 'react-hot-toast';
 
 // import getStripe from '../lib/getStripe';

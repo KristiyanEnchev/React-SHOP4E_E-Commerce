@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { MdOutlineCancel } from 'react-icons/md';
-import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import StoreMallDirectoryIcon from '@mui/icons-material/StoreMallDirectory';
 
 import { useStateContext } from '../contexts/ContextProvider.js';
 import { IoMdContacts } from 'react-icons/io';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { Tooltip } from '@mui/material';
 
 const links = [
   {
@@ -56,7 +56,7 @@ const Sidebar = () => {
               />{' '}
               <span>SHOP4E</span>
             </Link>
-            <TooltipComponent content="Menu" position="BottomCenter">
+            <Tooltip title="Menu" position="BottomCenter">
               <button
                 type="button"
                 onClick={() => setActiveMenu(!activeMenu)}
@@ -65,7 +65,7 @@ const Sidebar = () => {
               >
                 <MdOutlineCancel />
               </button>
-            </TooltipComponent>
+            </Tooltip>
           </div>
           <div className="mt-10 ">
             <p className="text-gray-400 dark:text-gray-400 m-3 mt-4 uppercase">

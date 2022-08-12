@@ -13,3 +13,19 @@ export async function getBanners() {
 export async function getProductBySlug(slug) {
   return await api.get(host + `/products/` + slug);
 }
+
+export async function getProductById(productId) {
+  return await api.get(host + `/products/get/` + productId);
+}
+
+export async function create(item) {
+  return await api.post(host + '/products/create', item);
+}
+
+export async function edit(id, item) {
+  return await api.put(host + '/products/' + id, item);
+}
+
+export async function deleteRequest(id) {
+  return await api.del(host + '/products/' + id);
+}
