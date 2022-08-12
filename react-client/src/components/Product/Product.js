@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import {
-  AiFillStar,
-  AiOutlineMinus,
-  AiOutlinePlus,
-  AiOutlineStar,
-} from 'react-icons/ai';
-// IoStarHalf,
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addToCart } from '../../redux/Public/cartSlice.js';
@@ -20,6 +14,7 @@ import {
   selectProducts,
 } from '../../redux/Public/productsSlice.js';
 import { Loader } from '../common/Loader/Loader.js';
+import Rating from '../rating/rating.js';
 
 import { ProductCard } from './ProductCard.js';
 const Product = () => {
@@ -90,7 +85,7 @@ const Product = () => {
                 images?.map((item, i) => (
                   <img
                     key={i}
-                    alt="troduct"
+                    alt="product"
                     src={item}
                     className={
                       i === index ? 'small-image selected-image' : 'small-image'
@@ -105,13 +100,11 @@ const Product = () => {
             <h1>{name}</h1>
             <div className="reviews">
               <div>
-                <AiFillStar />
-                <AiFillStar />
-                <AiFillStar />
-                <AiFillStar />
-                <AiOutlineStar />
+                <Rating
+                  rating={product.rating}
+                  numReviews={product.numReviews}
+                />
               </div>
-              <p>(20)</p>
             </div>
             <h4>Details: </h4>
             <p>{description}</p>

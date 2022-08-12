@@ -8,7 +8,7 @@ import { clearCart } from '../../redux/Public/cartSlice.js';
 import { UserActions } from '../../Admin/components/Helpers/UserListConstants.js';
 // import toast from 'react-hot-toast';
 
-// import getStripe from '../lib/getStripe';
+// import getStripe from '../services/getStripe';
 
 const Cart = () => {
   const cartRef = useRef();

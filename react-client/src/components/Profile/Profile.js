@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../redux/Public/AuthSlice.js';
 import { updateUser } from '../../redux/Admin/UsersSlice.js';
-import { UserActions } from '../../Admin/components/Helpers/UserListConstants.js';
-import { closeModal } from '../../redux/Public/modalSlice.js';
 import {
   avatarValidator,
   emailValidator,

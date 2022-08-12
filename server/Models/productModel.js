@@ -34,6 +34,7 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
       min: [0, 'Rating must be a positive number'],
+      mix: [5, 'Rating must be no more than 5'],
     },
     numReviews: { type: Number, required: true },
     reviews: [reviewSchema],

@@ -57,8 +57,9 @@ const data = {
       price: 120,
       _ownerId: '4eb6e7e7e9b7f4194e000001',
       countInStock: 10,
-      rating: 4.5,
-      numReviews: 10,
+      rating: 3.5,
+      reviews: [],
+      numReviews: 0,
       description:
         'lorem ipsum dolor sit amet consectetur adipiscing elit torquent praesent et quisque cubilia ut purus nostra enim senectus platea condimentum efficitur feugiat mattis accumsan pellentesque tortor malesuada ex ante finibus cras duis aliquet placerat class felis montes commodo bibendum nam iaculis nisl leo semper vulputate nisi sapien a tempus libero',
     },
@@ -77,7 +78,10 @@ const data = {
       countInStock: 10,
       _ownerId: '4eb6e7e7e9b7f4194e000001',
       rating: 4.5,
-      numReviews: 13,
+      numReviews: 1,
+      reviews: [
+        { name: 'koko', comment: 'Some very nice Sneekers', rating: 4.5 },
+      ],
       description:
         'lorem ipsum dolor sit amet consectetur adipiscing elit torquent praesent et quisque cubilia ut purus nostra enim senectus platea condimentum efficitur feugiat mattis accumsan pellentesque tortor malesuada ex ante finibus cras duis aliquet placerat class felis montes commodo bibendum nam iaculis nisl leo semper vulputate nisi sapien a tempus libero',
     },
@@ -95,8 +99,21 @@ const data = {
       price: 200,
       countInStock: 10,
       _ownerId: '4eb6e7e7e9b7f4194e000001',
-      rating: 4.5,
-      numReviews: 13,
+      rating: 2.5,
+      numReviews: 3,
+      reviews: [
+        { name: 'koko', comment: 'Some very nice Sneekers', rating: 3 },
+        {
+          name: 'hiho',
+          comment: 'Goodones !!! ',
+          rating: 1.5,
+        },
+        {
+          name: 'some some',
+          comment: 'Awsome I love them',
+          rating: 2,
+        },
+      ],
       description:
         'lorem ipsum dolor sit amet consectetur adipiscing elit torquent praesent et quisque cubilia ut purus nostra enim senectus platea condimentum efficitur feugiat mattis accumsan pellentesque tortor malesuada ex ante finibus cras duis aliquet placerat class felis montes commodo bibendum nam iaculis nisl leo semper vulputate nisi sapien a tempus libero',
     },
@@ -114,8 +131,16 @@ const data = {
       price: 250,
       countInStock: 0,
       _ownerId: '4eb6e7e7e9b7f4194e000001',
-      rating: 4.0,
-      numReviews: 10,
+      rating: 4,
+      numReviews: 2,
+      reviews: [
+        { name: 'koko', comment: 'Some very nice Sneekers', rating: 4 },
+        {
+          name: 'hiho',
+          comment: 'Goodones !!! ',
+          rating: 4,
+        },
+      ],
       description:
         'lorem ipsum dolor sit amet consectetur adipiscing elit torquent praesent et quisque cubilia ut purus nostra enim senectus platea condimentum efficitur feugiat mattis accumsan pellentesque tortor malesuada ex ante finibus cras duis aliquet placerat class felis montes commodo bibendum nam iaculis nisl leo semper vulputate nisi sapien a tempus libero',
     },
@@ -134,8 +159,9 @@ const data = {
       price: 25,
       _ownerId: '4eb6e7e7e9b7f4194e000001',
       countInStock: 15,
-      rating: 4.5,
-      numReviews: 14,
+      rating: 5,
+      numReviews: 0,
+      reviews: [],
       description:
         'lorem ipsum dolor sit amet consectetur adipiscing elit torquent praesent et quisque cubilia ut purus nostra enim senectus platea condimentum efficitur feugiat mattis accumsan pellentesque tortor malesuada ex ante finibus cras duis aliquet placerat class felis montes commodo bibendum nam iaculis nisl leo semper vulputate nisi sapien a tempus libero',
     },
@@ -155,7 +181,10 @@ const data = {
       price: 65,
       countInStock: 5,
       rating: 4.5,
-      numReviews: 10,
+      numReviews: 1,
+      reviews: [
+        { name: 'koko', comment: 'Some very nice Sneekers', rating: 4.5 },
+      ],
       description:
         'lorem ipsum dolor sit amet consectetur adipiscing elit torquent praesent et quisque cubilia ut purus nostra enim senectus platea condimentum efficitur feugiat mattis accumsan pellentesque tortor malesuada ex ante finibus cras duis aliquet placerat class felis montes commodo bibendum nam iaculis nisl leo semper vulputate nisi sapien a tempus libero',
     },
