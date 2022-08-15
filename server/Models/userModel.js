@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
       lastName: String,
       avatar: {
         type: String,
-        match: [/^https?:\/\/.+/, 'ImageUrl is not valid!'],
+        match: [/^https?:\/\/.+/, 'avatar is not valid!'],
       },
       bio: String,
       address: {

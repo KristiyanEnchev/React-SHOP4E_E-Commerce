@@ -5,13 +5,12 @@ export const settings = {
 export async function request(url, options) {
   try {
     const response = await fetch(url, options);
-
     if (response.ok === false) {
       if (response.status === 401) {
         sessionStorage.removeItem('email');
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('avatar');
-        sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('_id');
         sessionStorage.removeItem('name');
         sessionStorage.removeItem('isAdmin');
       }
@@ -75,7 +74,6 @@ export async function login(email, password) {
   sessionStorage.setItem('_id', result._id);
   sessionStorage.setItem('token', result.token);
   sessionStorage.setItem('avatar', result.avatar);
-  sessionStorage.setItem('userId', result._id);
   sessionStorage.setItem('email', result.email);
   sessionStorage.setItem('name', result.name);
   sessionStorage.setItem('isAdmin', result.isAdmin);
@@ -91,7 +89,7 @@ export async function register(email, name, password) {
   });
 
   sessionStorage.setItem('token', result.token);
-  sessionStorage.setItem('userId', result._id);
+  sessionStorage.setItem('_id', result._id);
   sessionStorage.setItem('email', result.email);
   sessionStorage.setItem('name', result.name);
 
@@ -103,7 +101,7 @@ export async function logout() {
 
   sessionStorage.removeItem('token');
   sessionStorage.removeItem('avatar');
-  sessionStorage.removeItem('userId');
+  sessionStorage.removeItem('_id');
   sessionStorage.removeItem('email');
   sessionStorage.removeItem('name');
   sessionStorage.removeItem('isAdmin');

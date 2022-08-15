@@ -14,6 +14,7 @@ import { useStateContext } from './contexts/ContextProvider.js';
 import { Tooltip } from '@mui/material';
 import { Toaster } from 'react-hot-toast';
 import { Home } from './components/Home/Home.js';
+import { PageNotFound } from '../components/common/404/PageNotFound.js';
 
 export const AdminPanel = () => {
   const {
@@ -79,6 +80,7 @@ export const AdminPanel = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/products" element={<Products />} />
+                <Route path="/*" element={<PageNotFound />} />
               </Routes>
             </div>
             <Footer />

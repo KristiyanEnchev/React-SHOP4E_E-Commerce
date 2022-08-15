@@ -490,7 +490,6 @@ ul {
 
     .image-container {
         margin-right: 0px;
-        display: flex;
         justify-content: center;
         margin: 10px 0px;
     }

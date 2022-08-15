@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Helmet } from 'react-helmet-async';
-import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../../redux/Public/AuthSlice.js';
 import { emailValidator, passwordValidator } from './Validators.js';
@@ -27,13 +26,8 @@ export const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    try {
-      await dispatch(userLogin({ email, password }));
-      navigate(redirect || '/');
-      toast.success('Successful Login');
-    } catch (err) {
-      // toast.error(getError(err));
-    }
+    dispatch(userLogin({ email, password }));
+    navigate(redirect || '/');
   };
 
   const validator = (e) => {

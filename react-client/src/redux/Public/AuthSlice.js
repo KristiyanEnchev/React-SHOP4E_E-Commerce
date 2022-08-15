@@ -2,18 +2,25 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as userService from '../../Services/UserService.js';
 import toast from 'react-hot-toast';
 import { getError } from '../../utils.js';
+import * as UploadService from '../../Services/UploadService.js';
+import * as UserService from '../../Services/UserService.js';
 
 const token = sessionStorage.getItem('token')
   ? sessionStorage.getItem('token')
   : null;
 
+const blankPictueUrl =
+  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png';
+
 const isAdmin = sessionStorage.getItem('isAdmin') === 'true' ? true : false;
+const pic = sessionStorage.getItem('avatar');
+const avatar = pic !== '' ? pic : blankPictueUrl;
 
 const initialState = {
   loading: false,
   error: null,
   _id: sessionStorage.getItem('_id'),
-  avatar: sessionStorage.getItem('avatar'),
+  avatar: avatar,
   name: sessionStorage.getItem('name'),
   email: sessionStorage.getItem('email'),
   isAdmin: isAdmin,
@@ -31,6 +38,20 @@ export const userLogin = createAsyncThunk(
     }
   }
 );
+export const logOut = createAsyncThunk('logout', async () => {
+  const res = await UserService.logout();
+  return res;
+});
+
+export const avatarUpload = createAsyncThunk('upload/profile', async (data) => {
+  const res = await UploadService.uploadPic(data);
+  return res;
+});
+
+export const updateUser = createAsyncThunk('users/update', async (data) => {
+  const res = await UserService.edit(data._id, data);
+  return res.user;
+});
 
 const authSlice = createSlice({
   name: 'auth',
@@ -44,16 +65,20 @@ const authSlice = createSlice({
       state.name = name;
       state.isAdmin = isAdmin;
     },
-    logOut: (state, action) => {
-      state._id = null;
-      state.email = null;
-      state.token = null;
-      state.name = null;
-      state.isAdmin = false;
+    setAvatar: (state, action) => {
+      const { avatar } = action.payload;
+      state.avatar = avatar;
     },
+    // logOut: (state, action) => {
+    //   state._id = null;
+    //   state.email = null;
+    //   state.token = null;
+    //   state.name = null;
+    //   state.isAdmin = false;
+    //   toast.success('Successful Logout');
+    // },
   },
   extraReducers: {
-    // login user
     [userLogin.pending]: (state) => {
       state.loading = true;
       state.error = null;
@@ -66,15 +91,71 @@ const authSlice = createSlice({
       state.name = payload.name;
       state.isAdmin = payload.isAdmin;
       state.avatar = payload.avatar;
+      toast.success('Successful Login');
     },
     [userLogin.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      toast.error(getError(payload));
+    },
+
+    [avatarUpload.pending]: (state) => {
+      state.loading = true;
+    },
+    [avatarUpload.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.avatar = action.payload.url;
+      toast.success('Image uploaded successfully. click Update to apply it');
+    },
+    [avatarUpload.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+      toast.error(getError(action.error));
+    },
+
+    [updateUser.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [updateUser.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      state.loading = false;
+      state.name = action.payload.name;
+      state.email = action.payload.email;
+      state.avatar = action.payload.profile.avatar;
+      state.isAdmin = action.payload.isAdmin;
+      state.token = initialState.token;
+      state._id = action.payload._id;
+
+      toast.success('Successful updated user');
+    },
+    [updateUser.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+      toast.error(getError(action.error));
+    },
+
+    [logOut.pending]: (state) => {
+      state.loading = true;
+    },
+    [logOut.fulfilled]: (state, action) => {
+      state.loading = false;
+      state._id = null;
+      state.email = null;
+      state.avatar = null;
+      state.token = null;
+      state.name = null;
+      state.isAdmin = false;
+      toast.success(action.payload.message);
+    },
+    [logOut.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+      toast.error(getError(action.error));
     },
   },
 });
 
-export const { setCredentials, logOut } = authSlice.actions;
+export const { setCredentials, setAvatar } = authSlice.actions;
 
 export default authSlice.reducer;
 
