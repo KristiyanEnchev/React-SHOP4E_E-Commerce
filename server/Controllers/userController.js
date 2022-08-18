@@ -19,7 +19,6 @@ export const getUser = expressAsyncHandler(async (req, res) => {
     res.send(user);
   } else {
     res.status(404).send({ message: 'User Not Found' });
-    // throw new NotFoundError('User Not Found', 404);
   }
 });
 
@@ -38,7 +37,6 @@ export const updateUser = expressAsyncHandler(async (req, res) => {
     const updatedUser = await user.save();
     res.send({ message: 'User Updated', user: updatedUser });
   } else {
-    // throw new NotFoundError('User Not Found', 404);
     res.status(404).send({ message: 'User Not Found' });
   }
 });
@@ -48,13 +46,11 @@ export const deleteUser = expressAsyncHandler(async (req, res) => {
   const user = await User.findById(req.params.userId);
   if (user) {
     if (user.email === 'admin@example.com') {
-      // throw new RequestError('Can Not Delete Admin User');
       return res.status(400).send({ message: 'Can Not Delete Admin User' });
     }
     await user.remove();
     res.send({ message: 'User Deleted' });
   } else {
-    // throw new NotFoundError('User Not Found', 404);
     res.status(404).send({ message: 'User Not Found' });
   }
 });

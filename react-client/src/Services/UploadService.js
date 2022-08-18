@@ -7,6 +7,7 @@ export async function uploadPic(item) {
   })
     .then((res) => res.json())
     .then((data) => {
+      sessionStorage.setItem('avatar', data.secure_url);
       return data;
     });
 

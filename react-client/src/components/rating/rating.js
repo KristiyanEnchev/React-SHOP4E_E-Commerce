@@ -16,11 +16,23 @@ function Rating(props) {
   }
   return (
     <div className="product__details__rating">
-      <i className={getRating(1)}></i>
-      <i className={getRating(2)}></i>
-      <i className={getRating(3)}></i>
-      <i className={getRating(4)}></i>
-      <i className={getRating(5)}></i>
+      {numReviews === 0 ? (
+        <>
+          <i className="fa fa-star-o"></i>
+          <i className="fa fa-star-o"></i>
+          <i className="fa fa-star-o"></i>
+          <i className="fa fa-star-o"></i>
+          <i className="fa fa-star-o"></i>
+        </>
+      ) : (
+        <>
+          <i className={getRating(1)}></i>
+          <i className={getRating(2)}></i>
+          <i className={getRating(3)}></i>
+          <i className={getRating(4)}></i>
+          <i className={getRating(5)}></i>
+        </>
+      )}
 
       <span>({numReviews} reviews)</span>
     </div>

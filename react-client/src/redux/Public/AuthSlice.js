@@ -58,8 +58,9 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {
     setCredentials: (state, action) => {
-      const { _id, name, isAdmin, email, token } = action.payload;
+      const { _id, name, isAdmin, email, token, avatar } = action.payload;
       state._id = _id;
+      state.avatar = avatar;
       state.token = token;
       state.email = email;
       state.name = name;
@@ -68,15 +69,8 @@ const authSlice = createSlice({
     setAvatar: (state, action) => {
       const { avatar } = action.payload;
       state.avatar = avatar;
+      // sessionStorage.setItem('avatar', avatar);
     },
-    // logOut: (state, action) => {
-    //   state._id = null;
-    //   state.email = null;
-    //   state.token = null;
-    //   state.name = null;
-    //   state.isAdmin = false;
-    //   toast.success('Successful Logout');
-    // },
   },
   extraReducers: {
     [userLogin.pending]: (state) => {
@@ -104,7 +98,8 @@ const authSlice = createSlice({
     },
     [avatarUpload.fulfilled]: (state, action) => {
       state.loading = false;
-      state.avatar = action.payload.url;
+      state.avatar = action.payload.secure_url;
+      sessionStorage.setItem('avatar', action.payload.secure_url);
       toast.success('Image uploaded successfully. click Update to apply it');
     },
     [avatarUpload.rejected]: (state, action) => {
@@ -117,14 +112,18 @@ const authSlice = createSlice({
       state.loading = true;
     },
     [updateUser.fulfilled]: (state, action) => {
-      console.log(action.payload);
       state.loading = false;
-      state.name = action.payload.name;
-      state.email = action.payload.email;
-      state.avatar = action.payload.profile.avatar;
-      state.isAdmin = action.payload.isAdmin;
-      state.token = initialState.token;
-      state._id = action.payload._id;
+      const { name, email, profile } = action.payload;
+      state.avatar = profile.avatar;
+      state.email = email;
+      state.name = name;
+      // state.name = action.payload.name;
+      // state.email = action.payload.email;
+      // state.avatar = action.payload.profile.avatar;
+      // // state.avatar = initialState.avatar;
+      // state.isAdmin = action.payload.isAdmin;
+      // state.token = initialState.token;
+      // state._id = action.payload._id;
 
       toast.success('Successful updated user');
     },

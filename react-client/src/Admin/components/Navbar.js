@@ -1,7 +1,8 @@
 import { Tooltip } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 
 import { useStateContext } from '../contexts/ContextProvider.js';
 import UserProfile from './UserProfile.js';
@@ -24,7 +25,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 );
 
 const Navbar = () => {
-  const [currentUser, setCurrentUser] = useState({});
+  const user = useSelector((state) => state.auth);
 
   const {
     currentColor,
@@ -35,17 +36,6 @@ const Navbar = () => {
     setScreenSize,
     screenSize,
   } = useStateContext();
-
-  useEffect(() => {
-    const currentUserName = sessionStorage.getItem('name');
-    const currentUserAvatar = sessionStorage.getItem('avatar');
-    const currentUserEmail = sessionStorage.getItem('email');
-    setCurrentUser({
-      name: currentUserName,
-      avatar: currentUserAvatar,
-      email: currentUserEmail,
-    });
-  }, []);
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -83,20 +73,20 @@ const Navbar = () => {
           >
             <img
               className="rounded-full w-8 h-8"
-              src={currentUser?.avatar}
+              src={user?.avatar}
               alt="user-profile"
             />
             <p>
               <span className="text-gray-400 text-14">Hi,</span>{' '}
               <span className="text-gray-400 font-bold ml-1 text-14">
-                {currentUser.name}
+                {user.name}
               </span>
             </p>
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
           </div>
         </Tooltip>
 
-        {isClicked.userProfile && <UserProfile user={currentUser} />}
+        {isClicked.userProfile && <UserProfile user={user} />}
       </div>
     </div>
   );

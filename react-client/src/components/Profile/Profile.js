@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {
   avatarUpload,
-  setAvatar,
   setCredentials,
   updateUser,
 } from '../../redux/Public/AuthSlice.js';
@@ -32,10 +31,8 @@ export const Profile = () => {
 
   const user = useSelector((state) => state.auth);
   const { avatar, email, name, loading } = user;
-  const [errors, setErrors] = useState({});
 
-  const [currentAvatar, setcurrentAvatar] = useState('');
-  const [theFile, setFile] = useState('');
+  const [errors, setErrors] = useState({});
 
   const changeHandler = (e) => {
     dispatch(
@@ -68,26 +65,22 @@ export const Profile = () => {
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      setcurrentAvatar(URL.createObjectURL(img));
       const file = event.target.files[0];
       const bodyFormData = new FormData();
       bodyFormData.append('file', file);
-      setFile(bodyFormData);
+      dispatch(avatarUpload(bodyFormData));
+      // dispatch(setAvatar({ avatar: URL.createObjectURL(file) }));
     }
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     const { avatar, ...userData } = user;
     userData.profile = { avatar: avatar };
-    uploadFileHandler(theFile);
     dispatch(updateUser(userData));
-    navigate(redirect || '/');
-  };
 
-  const uploadFileHandler = async (bodyFormData) => {
-    dispatch(avatarUpload(bodyFormData));
+    navigate(redirect || '/');
   };
 
   const AvatarComponent = ({ onChange, src }) => (
@@ -129,7 +122,7 @@ export const Profile = () => {
           <div className="underline-title"></div>
           <form onSubmit={submitHandler} className="form">
             <AvatarComponent
-              src={currentAvatar !== '' ? currentAvatar : avatar}
+              src={avatar ?? blankPictueUrl}
               onChange={(e) => onImageChange(e)}
             />
 

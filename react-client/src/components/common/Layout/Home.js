@@ -8,6 +8,7 @@ import {
   getProducts,
   selectProducts,
 } from '../../../redux/Public/productsSlice.js';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <div className="layout">
         <main className="main-container">
           <HeroBanner />
